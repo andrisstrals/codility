@@ -1,0 +1,14 @@
+.idea/
+*.iml
+*.log
+target/
+
+### Gradle ###
+.gradle
+build/
+
+# Ignore Gradle GUI config
+gradle-app.setting
+/src/toDump.xml
+/dependency-reduced-pom.xml
+/dependency-reduced-pom.xml
