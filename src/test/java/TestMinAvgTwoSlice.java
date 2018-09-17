@@ -9,6 +9,7 @@ import static org.junit.Assert.assertTrue;
 
 
 public class TestMinAvgTwoSlice {
+    public static final int MAX_LENGTH = 10000000;
     private MinAvgTwoSlice sol = new MinAvgTwoSlice();
 
     @Test
@@ -23,14 +24,46 @@ public class TestMinAvgTwoSlice {
         assertEquals(2, sol.solution(in));
     }
 
+
+
     @Test
     public void timingTest() {
         Random r = new Random();
-        int[] in = IntStream.generate(r::nextInt).limit(10000000).toArray();
+        int[] in = IntStream.generate(r::nextInt).limit(MAX_LENGTH).toArray();
         long start = System.currentTimeMillis();
         sol.solution(in);
         long time = System.currentTimeMillis() - start;
-        System.out.println("in " + in.length + " values, time:" + time);
-        assertTrue(time < 1000);
+        System.out.println("timing in " + in.length + " values, time:" + time);
+        assertTrue(time < 500);
+    }
+
+    @Test
+    public void timingTestExtremeSmall() {
+        Random r = new Random();
+        int[] in = IntStream.generate(r::nextInt)
+            .limit(MAX_LENGTH)
+            .map(v-> v > Integer.MAX_VALUE /3 ? 1 : (v < Integer.MIN_VALUE /3 ? -1 : 0))
+            .toArray();
+
+        long start = System.currentTimeMillis();
+        sol.solution(in);
+        long time = System.currentTimeMillis() - start;
+        System.out.println("extreme small in " + in.length + " values, time:" + time);
+        assertTrue(time < 500);
+    }
+
+    @Test
+    public void timingTestExtremeMax() {
+        Random r = new Random();
+        int[] in = IntStream.generate(r::nextInt)
+            .limit(MAX_LENGTH)
+            .map(v-> v > 0 ? Integer.MAX_VALUE  : Integer.MIN_VALUE )
+            .toArray();
+
+        long start = System.currentTimeMillis();
+        sol.solution(in);
+        long time = System.currentTimeMillis() - start;
+        System.out.println("extreme large in " + in.length + " values, time:" + time);
+        assertTrue(time < 500);
     }
 }
