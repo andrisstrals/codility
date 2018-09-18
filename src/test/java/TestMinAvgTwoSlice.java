@@ -1,6 +1,7 @@
 import com.MinAvgTwoSlice;
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.Random;
 import java.util.stream.IntStream;
 
@@ -33,7 +34,7 @@ public class TestMinAvgTwoSlice {
         long start = System.currentTimeMillis();
         sol.solution(in);
         long time = System.currentTimeMillis() - start;
-        System.out.println("timing in " + in.length + " values, time:" + time);
+        System.out.println("random timing in " + in.length + " values, time:" + time);
         assertTrue(time < 500);
     }
 
@@ -64,6 +65,18 @@ public class TestMinAvgTwoSlice {
         sol.solution(in);
         long time = System.currentTimeMillis() - start;
         System.out.println("extreme large in " + in.length + " values, time:" + time);
+        assertTrue(time < 500);
+    }
+
+    @Test
+    public void timingTestAllMax() {
+        int[] in = new int[10000];
+        Arrays.fill(in, Integer.MAX_VALUE);
+
+        long start = System.currentTimeMillis();
+        sol.solution(in);
+        long time = System.currentTimeMillis() - start;
+        System.out.println("all max in " + in.length + " values, time:" + time);
         assertTrue(time < 500);
     }
 }
