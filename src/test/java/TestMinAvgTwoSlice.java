@@ -54,6 +54,21 @@ public class TestMinAvgTwoSlice {
     }
 
     @Test
+    public void timingTestExtremeBoolean() {
+        Random r = new Random();
+        int[] in = IntStream.generate(r::nextInt)
+            .limit(MAX_LENGTH)
+            .map(v-> v > 0 ? 1 : -1)
+            .toArray();
+
+        long start = System.currentTimeMillis();
+        sol.solution(in);
+        long time = System.currentTimeMillis() - start;
+        System.out.println("extreme small in " + in.length + " values, time:" + time);
+        assertTrue(time < 500);
+    }
+
+    @Test
     public void timingTestExtremeMax() {
         Random r = new Random();
         int[] in = IntStream.generate(r::nextInt)
@@ -70,13 +85,25 @@ public class TestMinAvgTwoSlice {
 
     @Test
     public void timingTestAllMax() {
-        int[] in = new int[10000];
+        int[] in = new int[MAX_LENGTH];
         Arrays.fill(in, Integer.MAX_VALUE);
 
         long start = System.currentTimeMillis();
         sol.solution(in);
         long time = System.currentTimeMillis() - start;
         System.out.println("all max in " + in.length + " values, time:" + time);
+        assertTrue(time < 500);
+    }
+
+    @Test
+    public void timingTestAllMin() {
+        int[] in = new int[MAX_LENGTH];
+        Arrays.fill(in, Integer.MIN_VALUE);
+
+        long start = System.currentTimeMillis();
+        sol.solution(in);
+        long time = System.currentTimeMillis() - start;
+        System.out.println("all min in " + in.length + " values, time:" + time);
         assertTrue(time < 500);
     }
 }

@@ -14,7 +14,8 @@ public class MinAvgTwoSlice {
                 if(val < slice) {
                     slice = val;
                 }
-                else if(val > slice) {
+                else //if(val > slice)
+                {
                     break;
                 }
             }
